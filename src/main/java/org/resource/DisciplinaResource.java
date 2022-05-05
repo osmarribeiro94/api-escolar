@@ -1,6 +1,7 @@
-package org.controller;
+package org.resource;
 
 import org.services.DisciplinaService;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.model.Disciplina;
 
 import javax.inject.Inject;
@@ -10,9 +11,10 @@ import javax.ws.rs.core.*;
 import java.util.List;
 
 @Path("/disciplina")
+@Tag(name="Disciplina")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class DisciplinaController {
+public class DisciplinaResource {
 
     @Inject
     private DisciplinaService disciplinaServices;

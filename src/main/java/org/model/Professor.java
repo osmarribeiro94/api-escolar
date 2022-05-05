@@ -3,7 +3,11 @@ package org.model;
 import javax.persistence.*;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import lombok.*;
 
+@Getter
+@Setter
+@Table(name = "professor")
 @Entity
 public class Professor extends PanacheEntityBase{
         
@@ -17,29 +21,10 @@ public class Professor extends PanacheEntityBase{
     @Column
     private String nome;
 
+    @OneToMany
+    @JoinColumn(name="disciplina_id")
+    private Disciplina disciplina;
+
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
 }

@@ -1,6 +1,7 @@
-package org.controller;
+package org.resource;
 
 import org.services.ProfessorService;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.model.Professor;
 
 import javax.inject.Inject;
@@ -10,9 +11,10 @@ import javax.ws.rs.core.*;
 import java.util.List;
 
 @Path("/professor")
+@Tag(name="Professor")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ProfessorController {
+public class ProfessorResource {
 
     @Inject
     private ProfessorService professorServices;

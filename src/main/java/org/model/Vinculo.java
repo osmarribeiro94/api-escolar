@@ -2,8 +2,13 @@ package org.model;
 
 import javax.persistence.*;
 
+import java.util.List;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import lombok.*;
 
+@Getter
+@Setter
+@Table(name = "vinculo")
 @Entity
 public class Vinculo extends PanacheEntityBase{
         
@@ -11,24 +16,11 @@ public class Vinculo extends PanacheEntityBase{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String nome;
+    @ManyToMany
+    private List<Aluno> alunos;
 
-    
-    public Long getId() {
-        return id;
-    }
+    @ManyToMany
+    private List<Disciplina> disciplinas;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
 }

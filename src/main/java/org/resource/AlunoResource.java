@@ -1,6 +1,8 @@
-package org.controller;
+package org.resource;
 
 import org.services.*;
+import org.DTO.AlunoDTO;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.model.Aluno;
 
 import javax.inject.Inject;
@@ -10,9 +12,10 @@ import javax.ws.rs.core.*;
 import java.util.List;
 
 @Path("/aluno")
+@Tag(name = "Aluno")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AlunoController {
+public class AlunoResource {
 
     @Inject
     private AlunoService alunoServices;
@@ -24,21 +27,23 @@ public class AlunoController {
 
     @POST
     @Transactional
-    public Response create(Aluno aluno) {
-        Aluno.persist(aluno);
+    public Response create(AlunoDTO dto) {
+
+        Aluno aluno = alunoServices.create(dto);
+
         return Response.ok(aluno).status(201).build();
     }
 
     @PUT
     @Path("{id}")
     @Transactional
-    public Response update(@PathParam("id") Long id, Aluno aluno) {
+    public Response update(@PathParam("id") Long id, AlunoDTO dto) {
 
-        if (alunoServices.isAlunoNameIsNotEmpty(aluno)) {
+        if (alunoServices.isAlunoNameIsNotEmpty(dto)) {
             return Response.ok("Nome was not found").type(MediaType.APPLICATION_JSON_TYPE).build();
         }
 
-        Aluno alunoEntity = alunoServices.update(id, aluno);
+        Aluno alunoEntity = alunoServices.update(id, dto);
 
         return Response.ok(alunoEntity).build();
     }
@@ -56,6 +61,5 @@ public class AlunoController {
         alunoEntity.delete();
         return Response.status(204).build();
     }
-
 
 }
